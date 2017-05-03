@@ -3,25 +3,25 @@ import urllib.request
 import re
 import sys
 
+websiteAddress = input("Enter website url: ")
+textToFind = input("Enter word to search (the search is case sensitive): ")
 
-address = input("Enter website url: ")
-
-with urllib.request.urlopen(address) as url:
+with urllib.request.urlopen(websiteAddress) as url:
     html_content = url.read()
 
 htmlString = html_content.decode("utf-8")
 
-matches = re.findall('Soccerway', htmlString);
+matches = re.findall(textToFind, htmlString);
 stringOccurences = len(matches)
 
 if stringOccurences != 0:
-   print ("String occured " + str(stringOccurences) + " times")
+   print (str(stringOccurences) + " occurences of \'" + str(textToFind) + "\' found on: " +  str(websiteAddress))
 else:
-   print ("String not found")
+   print ("No occurences of \'" + str(textToFind) + "\' on " + str(websiteAddress))
 
 decision = input("Would you like to visit the site? (y/n): ")
 
 if decision is 'y':
-    webbrowser.open(address)
+    webbrowser.open(websiteAddress)
 if decision is 'n':
     sys.exit()
