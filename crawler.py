@@ -19,9 +19,9 @@ if stringOccurences != 0:
 else:
    print ("No occurences of \'" + str(textToFind) + "\' on " + str(websiteAddress))
 
-decision = input("Would you like to visit the site? (y/n): ")
+decision = input("Would you like to visit the site? (yes/no): ")
 
-if decision is 'y':
+if decision is 'yes':
     webbrowser.open(websiteAddress)
-if decision is 'n':
+if decision is 'no':
     sys.exit()
