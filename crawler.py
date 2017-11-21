@@ -1,17 +1,14 @@
 import webbrowser
-import urllib.request
+import requests
 import re
 import sys
 
 websiteAddress = input("Enter website url: ")
 textToFind = input("Enter word to search (the search is case sensitive): ")
 
-with urllib.request.urlopen(websiteAddress) as url:
-    html_content = url.read()
+html_content = requests.get(websiteAddress).text
 
-htmlString = html_content.decode("utf-8")
-
-matches = re.findall(textToFind, htmlString);
+matches = re.findall(textToFind, html_content)
 stringOccurences = len(matches)
 
 if stringOccurences != 0:
@@ -19,9 +16,9 @@ if stringOccurences != 0:
 else:
    print ("No occurences of \'" + str(textToFind) + "\' on " + str(websiteAddress))
 
-decision = input("Would you like to visit the site? (yes/no): ")
+decision = input("Would you like to visit the site? (y/n): ")
 
-if decision is 'yes':
+if decision == 'y':
     webbrowser.open(websiteAddress)
-if decision is 'no':
+if decision == 'n':
     sys.exit()
