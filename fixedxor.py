@@ -2,11 +2,15 @@
 import binascii
 import base64
 
-buffferOne = raw_input("Buffer 1: ")
-buffferTwo = raw_input("Buffer 2: ")
+def byteXor(string1, string2):
+    return bytes([_x ^ _y for _x,_y in zip(string1, string2)])
+
+buffferOne = input("Buffer 1: ")
+buffferTwo = input("Buffer 2: ")
 
 bufferOneHexDecoded = binascii.unhexlify(buffferOne)
 bufferTwoHexDecoded = binascii.unhexlify(buffferTwo)
-xored = ''.join(chr(ord(x) ^ ord(y)) for (x,y) in zip(bufferOneHexDecoded, bufferTwoHexDecoded))
 
-print("Xored: " + binascii.hexlify(xored))
+xored = byteXor(bufferOneHexDecoded, bufferTwoHexDecoded)
+
+print(binascii.hexlify(xored).decode("utf-8"))
