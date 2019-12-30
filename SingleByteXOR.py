@@ -34,7 +34,6 @@ def get_english_score(input_bytes):
     }
     return sum([character_frequencies.get(chr(byte), 0) for byte in input_bytes.lower()])
 
-
 cipherText = input("Ciphertext: ")
 cipherTextDecoded = binascii.unhexlify(cipherText)
 
